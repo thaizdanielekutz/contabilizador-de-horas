@@ -1,0 +1,10 @@
+* {
+  min-height: 100%;
+}
+body {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(27, 26, 26),
+    rgb(169, 169, 190)
+  );
+}
