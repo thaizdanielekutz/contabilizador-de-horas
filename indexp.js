@@ -19,15 +19,15 @@ function calcularHoraSaida(horaSaida, tempoPermanencia) {
   return converterParaHoraMinutos(minutosTotais);
 }
 
-// Função para iniciar uma nova contagem de tempo
-function iniciarNovaContagem() {
+// Função para iniciar uma nova contagem de tempo ou voltar à página inicial
+function iniciarNovaContagemOuVoltar() {
   const entrada1 = prompt("Informe sua hora de saída: (Exemplo: 11.27)");
   const entrada2 = prompt("Informe seu tempo de permanência: (Exemplo: 1.30)");
   const horaSaida = calcularHoraSaida(entrada1, entrada2);
   alert(`Hora de saída calculada: ${horaSaida}`);
 
   // Exibir o resultado em um prompt com opções numeradas
-  const mensagem = `Hora de saída calculada: ${horaSaida}\n\nEscolha uma opção:\n1. Iniciar outra contagem\n2. Voltar à página inicial`;
+  const mensagem = `Escolha uma opção:\n1. Iniciar outra contagem\n2. Voltar à página inicial`;
   const escolha = prompt(mensagem);
 
   if (escolha === "1") {
