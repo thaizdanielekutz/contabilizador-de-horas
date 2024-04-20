@@ -26,16 +26,22 @@ function iniciarNovaContagem() {
   const horaSaida = calcularHoraSaida(entrada1, entrada2);
   alert(`Hora de saída calculada: ${horaSaida}`);
 
-  // Exibir o resultado em um alerta com opção de retornar à página inicial
-  const mensagem = `Hora de saída calculada: ${horaSaida}\n\nClique em OK para iniciar outra contagem.`;
-  const confirmarNovoCalculo = confirm(mensagem);
-  if (confirmarNovoCalculo) {
-    iniciarNovaContagem(); // Reinicia o processo
-  } else {
+  // Exibir o resultado em um prompt com opções numeradas
+  const mensagem = `Hora de saída calculada: ${horaSaida}\n\nEscolha uma opção:\n1. Iniciar outra contagem\n2. Voltar à página inicial`;
+  const escolha = prompt(mensagem);
+
+  if (escolha === "1") {
+    iniciarNovaContagemOuVoltar(); // Reinicia o processo
+  } else if (escolha === "2") {
     // Redirecionar para a página inicial (index.html)
     window.location.href = "index.html";
+  } else {
+    alert(
+      "Opção inválida. Por favor, escolha 1 para iniciar outra contagem ou 2 para voltar à página inicial."
+    );
+    iniciarNovaContagemOuVoltar(); // Solicita novamente a escolha válida
   }
 }
 
-// Inicia a primeira contagem de tempo
-iniciarNovaContagem();
+// Inicia a primeira contagem de tempo ou voltar à página inicial
+iniciarNovaContagemOuVoltar();
