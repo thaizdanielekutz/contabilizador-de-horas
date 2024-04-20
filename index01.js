@@ -21,10 +21,10 @@ function calcularHoraSaida(horaSaida, tempoPermanencia) {
 
 // Solicitar entrada de dados ao usuário
 const entrada1 = prompt("Informe sua hora de saída: (Exemplo: 11.27)");
-const entrada2 = prompt("Informe seu tempo de permanência: (Exemplo: 1.30)");
+const entrada2 = prompt("Informe seu tempo de almoço: (Exemplo: 1.30)");
 
 // Calcular a hora de saída
 const horaSaida = calcularHoraSaida(entrada1, entrada2);
 
 // Exibir o resultado para o usuário
-alert(`Hora de saída calculada: ${horaSaida}`);
+alert(`Hora de voltar ao trabalho é: ${horaSaida}`);
