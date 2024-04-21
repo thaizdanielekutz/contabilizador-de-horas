@@ -4,38 +4,41 @@ function converterParaMinutos(tempo) {
   return horas * 60 + minutos;
 }
 
-// Função para converter minutos totais em tempo no formato hh.mm
+// Função para converter minutos totais de volta para o formato hh.mm
 function converterParaHoraMinutos(minutos) {
   const horas = Math.floor(minutos / 60);
   const minutosRestantes = minutos % 60;
-  return `${horas}.${minutosRestantes}`;
-}
-
-// Função principal que calcula a hora de saída somando com o tempo de permanência
-function calcularHoraSaida(horaSaida, tempoPermanencia) {
-  const minutosSaida = converterParaMinutos(horaSaida);
-  const minutosPermanencia = converterParaMinutos(tempoPermanencia);
-  const minutosTotais = minutosSaida + minutosPermanencia;
-  return converterParaHoraMinutos(minutosTotais);
+  return `${horas}.${minutosRestantes.toString().padStart(2, "0")}`;
 }
 
 // Função para iniciar uma nova contagem de tempo
 function iniciarNovaContagem() {
-  const entrada1 = prompt("Informe sua hora de saída: (Exemplo: 11.27)");
-  const entrada2 = prompt("Informe seu tempo de permanência: (Exemplo: 1.30)");
-  const horaSaida = calcularHoraSaida(entrada1, entrada2);
+  const entrada1 = prompt("Informe sua hora de chegada: (Exemplo: 7.26)");
+  const entrada2 = prompt("Informe seu tempo a permanecer: (Exemplo: 4.01)");
 
-  // Exibir o resultado em um alerta com opção de retornar à página inicial
-  const mensagem = `Hora de saída calculada: ${horaSaida}\n\nClique em OK para iniciar outra contagem.`;
-  const confirmarNovoCalculo = confirm(mensagem);
+  // Converter as entradas para minutos totais
+  const minutosChegada = converterParaMinutos(entrada1);
+  const minutosPermanencia = converterParaMinutos(entrada2);
 
-  if (confirmarNovoCalculo) {
-    iniciarNovaContagem(); // Reinicia o processo
-  } else {
+  // Calcular a soma dos minutos
+  const somaMinutos = minutosChegada + minutosPermanencia;
+
+  // Converter a soma de minutos de volta para o formato hh.mm
+  const resultadoHora = converterParaHoraMinutos(somaMinutos);
+
+  // Exibir o resultado em um alerta
+  const mensagem = `Hora de saída calculada: ${resultadoHora}\n\nEscolha uma opção:\n1. Iniciar outra contagem\n2. Encerrar`;
+  const escolha = prompt(mensagem);
+
+  if (escolha === "1") {
+    iniciarNovaContagem(); // Reiniciar o processo
+  } else if (escolha === "2") {
     // Redirecionar para a página inicial (index.html)
     window.location.href = "index.html";
+  } else {
+    alert("Opção inválida. Encerrando o processo.");
   }
 }
 
-// Inicia a primeira contagem de tempo
+// Iniciar a primeira contagem de tempo
 iniciarNovaContagem();

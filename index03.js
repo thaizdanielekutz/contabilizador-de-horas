@@ -1,6 +1,6 @@
 // Função para converter tempo no formato hh.mm em minutos totais
 function converterParaMinutos(tempo) {
-  const [horas, minutos] = tempo.split(".").map(Number);
+  const [horas, minutos] = tempo.split("(")[0].split(".").map(Number);
   return horas * 60 + minutos;
 }
 
@@ -13,15 +13,15 @@ function converterParaHoraMinutos(minutos) {
 
 // Função para iniciar uma nova contagem de tempo
 function iniciarNovaContagem() {
-  const entrada1 = prompt("Informe sua hora de chegada: (Exemplo: 7.26)");
+  const entrada1 = prompt("Informe sua hora de entrada: (Exemplo: 12.57(2))");
   const entrada2 = prompt("Informe seu tempo a permanecer: (Exemplo: 4.01)");
 
-  // Converter as entradas para minutos totais
-  const minutosChegada = converterParaMinutos(entrada1);
+  // Converter as entradas de tempo para minutos totais
+  const minutosEntrada = converterParaMinutos(entrada1);
   const minutosPermanencia = converterParaMinutos(entrada2);
 
   // Calcular a soma dos minutos
-  const somaMinutos = minutosChegada + minutosPermanencia;
+  const somaMinutos = minutosEntrada + minutosPermanencia;
 
   // Converter a soma de minutos de volta para o formato hh.mm
   const resultadoHora = converterParaHoraMinutos(somaMinutos);
@@ -33,7 +33,8 @@ function iniciarNovaContagem() {
   if (escolha === "1") {
     iniciarNovaContagem(); // Reiniciar o processo
   } else if (escolha === "2") {
-    alert("Obrigado por utilizar o Contabilizador de Horas!");
+    // Redirecionar para a página inicial (index.html)
+    window.location.href = "index.html";
   } else {
     alert("Opção inválida. Encerrando o processo.");
   }

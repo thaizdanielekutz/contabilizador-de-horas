@@ -1,43 +1,47 @@
 // Função para converter tempo no formato hh.mm em minutos totais
 function converterParaMinutos(tempo) {
-  const [horas, minutos] = tempo.split("(")[0].split(".").map(Number);
+  const [horas, minutos] = tempo.split(".").map(Number);
   return horas * 60 + minutos;
 }
 
-// Função para converter minutos totais de volta para o formato hh.mm
+// Função para converter minutos totais em tempo no formato hh.mm
 function converterParaHoraMinutos(minutos) {
   const horas = Math.floor(minutos / 60);
   const minutosRestantes = minutos % 60;
-  return `${horas}.${minutosRestantes.toString().padStart(2, "0")}`;
+  return `${horas}.${minutosRestantes}`;
 }
 
-// Função para iniciar uma nova contagem de tempo
-function iniciarNovaContagem() {
-  const entrada1 = prompt("Informe sua hora de entrada: (Exemplo: 12.57(2))");
-  const entrada2 = prompt("Informe seu tempo a permanecer: (Exemplo: 4.01)");
+// Função principal que calcula a hora de saída somando com o tempo de permanência
+function calcularHoraSaida(horaSaida, tempoPermanencia) {
+  const minutosSaida = converterParaMinutos(horaSaida);
+  const minutosPermanencia = converterParaMinutos(tempoPermanencia);
+  const minutosTotais = minutosSaida + minutosPermanencia;
+  return converterParaHoraMinutos(minutosTotais);
+}
 
-  // Converter as entradas de tempo para minutos totais
-  const minutosEntrada = converterParaMinutos(entrada1);
-  const minutosPermanencia = converterParaMinutos(entrada2);
+// Função para iniciar uma nova contagem de tempo ou voltar à página inicial
+function iniciarNovaContagemOuVoltar() {
+  const entrada1 = prompt("Informe sua hora de saída: (Exemplo: 11.27)");
+  const entrada2 = prompt("Informe seu tempo de permanência: (Exemplo: 1.30)");
+  const horaSaida = calcularHoraSaida(entrada1, entrada2);
+  alert(`Hora de saída calculada: ${horaSaida}`);
 
-  // Calcular a soma dos minutos
-  const somaMinutos = minutosEntrada + minutosPermanencia;
-
-  // Converter a soma de minutos de volta para o formato hh.mm
-  const resultadoHora = converterParaHoraMinutos(somaMinutos);
-
-  // Exibir o resultado em um alerta
-  const mensagem = `Hora de saída calculada: ${resultadoHora}\n\nEscolha uma opção:\n1. Iniciar outra contagem\n2. Encerrar`;
+  // Exibir o resultado em um prompt com opções numeradas
+  const mensagem = `Escolha uma opção:\n1. Iniciar outra contagem\n2. Voltar à página inicial`;
   const escolha = prompt(mensagem);
 
   if (escolha === "1") {
-    iniciarNovaContagem(); // Reiniciar o processo
+    iniciarNovaContagemOuVoltar(); // Reinicia o processo
   } else if (escolha === "2") {
-    alert("Obrigado por utilizar o Contabilizador de Horas!");
+    // Redirecionar para a página inicial (index.html)
+    window.location.href = "index.html";
   } else {
-    alert("Opção inválida. Encerrando o processo.");
+    alert(
+      "Opção inválida. Por favor, escolha 1 para iniciar outra contagem ou 2 para voltar à página inicial."
+    );
+    iniciarNovaContagemOuVoltar(); // Solicita novamente a escolha válida
   }
 }
 
-// Iniciar a primeira contagem de tempo
-iniciarNovaContagem();
+// Inicia a primeira contagem de tempo ou voltar à página inicial
+iniciarNovaContagemOuVoltar();
